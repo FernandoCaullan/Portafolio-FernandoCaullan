@@ -1,0 +1,20 @@
+/* ==========================================
+   CONFIGURACIÓN DE FUENTES PARA BOOTSTRAP
+   ========================================== */
+
+/* 1. Aplica Roboto a toda la página por defecto (textos, párrafos, botones, etc.) */
+body {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+/* 2. Aplica Inter a todos los encabezados nativos de Bootstrap */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif !important;
+    letter-spacing: -0.02em; /* Estrecha las letras para un acabado más premium */
+}
+
+/* 3. Clase opcional por si quieres forzar la fuente Inter en algún elemento común */
+.font-inter {
+    font-family: 'Inter', sans-serif !important;
+    letter-spacing: -0.02em;
+}
