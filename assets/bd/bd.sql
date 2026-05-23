@@ -43,4 +43,4 @@ CREATE Table if not exists llamado(
     email VARCHAR(255) not null,
     dato_importa VARCHAR(30) not null,
     msg_importa TEXT not null
-)
+);
