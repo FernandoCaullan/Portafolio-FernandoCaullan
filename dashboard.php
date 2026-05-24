@@ -135,6 +135,8 @@ if (!isset($_SESSION["user"])) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/biocrud.js"></script>
 <script src="assets/js/skillscrud.js"></script>
+<script src="assets/js/techcrud.js"></script>
+<script src="assets/js/projectscrud.js"></script>
 
 </body>
 </html>
