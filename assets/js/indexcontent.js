@@ -1,19 +1,46 @@
+
+// =======================
+// 🛡️ HELPERS
+// =======================
+
+async function fetchJSON(url) {
+    try {
+        const res = await fetch(url);
+
+        if (!res.ok) {
+            throw new Error(`HTTP error: ${res.status}`);
+        }
+
+        return await res.json();
+
+    } catch (err) {
+        console.error("Fetch error:", err);
+        return null;
+    }
+}
+
+function escapeHTML(str) {
+    if (!str) return "";
+    return str
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
 // =======================
 // 📌 BIO
 // =======================
+
 async function loadBioToIndex() {
 
-    const container = document.getElementById("bio-section");
+    const container = document.getElementById("bio-content");
 
-    const res = await fetch("api/biografia/GET_bio.php");
-    const data = await res.json();
+    const data = await fetchJSON("api/biografia/GET_bio.php");
 
-    if (data.status === "empty") {
-        container.innerHTML = `
-            <div class="text-center text-muted py-4">
-                Sin biografía disponible
-            </div>
-        `;
+    if (!data || data.status === "empty") {
+        container.innerHTML = `<p class="text-center text-muted">Sin biografía disponible</p>`;
         return;
     }
 
@@ -27,19 +54,17 @@ async function loadBioToIndex() {
                  style="width:160px;height:160px;object-fit:cover;">
 
             <h3 class="fw-bold text-warning-emphasis">
-                ${bio.nom_bio}
+                ${escapeHTML(bio.nom_bio)}
             </h3>
 
             <p class="lead text-secondary mb-3">
-                ${bio.mini_bio}
+                ${escapeHTML(bio.mini_bio)}
             </p>
 
             <div class="mx-auto" style="max-width:650px;">
-
                 <p class="text-muted lh-lg">
-                    ${bio.detalle_bio}
+                    ${escapeHTML(bio.detalle_bio)}
                 </p>
-
             </div>
 
         </div>
@@ -49,34 +74,39 @@ async function loadBioToIndex() {
 // =======================
 // 📌 SKILLS
 // =======================
+
 async function loadSkillsToIndex() {
 
-    const container = document.querySelector("#habilidades .container");
+    const container = document.getElementById("skills-content");
 
-    const res = await fetch("api/skills/GET_skills.php");
-    const data = await res.json();
+    const data = await fetchJSON("api/skills/GET_skills.php");
 
-    if (data.status !== "success") {
-        container.innerHTML = "<p class='text-center text-muted'>Sin habilidades</p>";
+    if (!data || data.status !== "success") {
+        container.innerHTML = `<p class="text-center text-muted">Sin habilidades</p>`;
         return;
     }
 
     container.innerHTML = `
-        <div class="row justify-content-center mt-3">
+        <div class="row justify-content-center mt-4 g-4">
 
-            ${data.data.map(s => `
-                <div class="col-6 col-md-3 text-center mb-3">
+            ${data.data.map(skill => `
 
-                    <div class="fw-bold">${s.nombre}</div>
+                <div class="col-6 col-md-3 col-lg-2">
 
-                    <div class="progress mt-2">
-                        <div class="progress-bar bg-warning"
-                             style="width:${s.porcentaje}%">
-                            ${s.porcentaje}%
+                    <div class="text-center p-3 bg-white rounded-4 shadow-sm skill-box">
+
+                        <img src="${skill.img_icono}"
+                             alt="${skill.nom_skill}"
+                             style="width:55px;height:55px;object-fit:contain;">
+
+                        <div class="fw-semibold mt-2">
+                            ${escapeHTML(skill.nom_skill)}
                         </div>
+
                     </div>
 
                 </div>
+
             `).join("")}
 
         </div>
@@ -86,31 +116,47 @@ async function loadSkillsToIndex() {
 // =======================
 // 📌 TECNOLOGÍAS
 // =======================
+
 async function loadTechToIndex() {
 
-    const container = document.querySelector("#tecnologias .container");
+    const container = document.getElementById("tech-content");
 
-    const res = await fetch("api/tecno/GET_tech.php");
-    const data = await res.json();
+    const data = await fetchJSON("api/tecno/GET_tech.php");
 
-    if (data.status !== "success") {
-        container.innerHTML = "<p class='text-center text-muted'>Sin tecnologías</p>";
+    if (!data || data.status !== "success") {
+        container.innerHTML = `<p class="text-center text-muted">Sin tecnologías</p>`;
         return;
     }
 
     container.innerHTML = `
-        <div class="row justify-content-center mt-3">
+        <div class="row justify-content-center mt-4 g-4">
 
             ${data.data.map(t => `
-                <div class="col-4 col-md-2 text-center mb-3">
 
-                    <img src="${t.img_icono}" width="50" class="mb-2">
+                <div class="col-6 col-md-3 col-lg-2">
 
-                    <div>${t.nom_Tec}</div>
+                    <div class="tech-card">
 
-                    <small class="text-muted">${t.porcentaje}%</small>
+                        <div class="tech-fill" style="--level:${t.porcentaje}%"></div>
+
+                        <div class="tech-content">
+
+                            <img src="${t.img_icono}" alt="${t.nom_Tec}">
+
+                            <div class="fw-semibold">
+                                ${escapeHTML(t.nom_Tec)}
+                            </div>
+
+                            <div class="tech-percent">
+                                ${t.porcentaje}%
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
+
             `).join("")}
 
         </div>
@@ -120,23 +166,24 @@ async function loadTechToIndex() {
 // =======================
 // 📌 PROYECTOS
 // =======================
+
 async function loadProjectsToIndex() {
 
-    const container = document.querySelector("#proyectos .container");
+    const container = document.getElementById("projects-content");
 
-    const res = await fetch("api/trabajos/GET_projects.php");
-    const data = await res.json();
+    const data = await fetchJSON("api/trabajos/GET_projects.php");
 
-    if (data.status !== "success") {
-        container.innerHTML = "<p class='text-center text-muted'>Sin proyectos</p>";
+    if (!data || data.status !== "success") {
+        container.innerHTML = `<p class="text-center text-muted">Sin proyectos</p>`;
         return;
     }
 
     container.innerHTML = `
-        <div class="row mt-3">
+        <div class="row mt-4 g-4">
 
             ${data.data.map(p => `
-                <div class="col-md-6 mb-4">
+
+                <div class="col-md-6">
 
                     <div class="card shadow-sm h-100">
 
@@ -144,10 +191,12 @@ async function loadProjectsToIndex() {
 
                         <div class="card-body">
 
-                            <h5 class="fw-bold">${p.titulo}</h5>
+                            <h5 class="fw-bold">
+                                ${escapeHTML(p.titulo)}
+                            </h5>
 
                             <p class="text-muted">
-                                ${p.descripcion}
+                                ${escapeHTML(p.descripcion)}
                             </p>
 
                             <div class="d-flex gap-2">
@@ -169,6 +218,7 @@ async function loadProjectsToIndex() {
                     </div>
 
                 </div>
+
             `).join("")}
 
         </div>
@@ -176,11 +226,14 @@ async function loadProjectsToIndex() {
 }
 
 // =======================
-// 📌 INIT GLOBAL (IMPORTANTE)
+// 🚀 INIT
 // =======================
+
 document.addEventListener("DOMContentLoaded", () => {
+
     loadBioToIndex();
     loadSkillsToIndex();
     loadTechToIndex();
     loadProjectsToIndex();
+
 });

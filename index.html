@@ -40,13 +40,6 @@
 
 </nav>
 
-<button id="miniNavBtn"
-  class="btn btn-dark position-fixed top-0 start-0 m-2 d-none"
-  data-bs-toggle="offcanvas"
-  data-bs-target="#sideMenu">
-  ☰
-</button>
-
 <!-- ================= OFFCANVAS ================= -->
 <div class="offcanvas offcanvas-start bg-warning" tabindex="-1" id="sideMenu">
 
@@ -76,54 +69,151 @@
 
 <!-- ================= CONTENIDO ================= -->
 
-<!-- HEADER (menos aire) -->
-<header id="inicio" class="py-3 mb-0">
-  <div class="container text-center">
-    <h1 class="fw-bold mb-0">Fernando Caullan</h1>
-  </div>
-</header>
-
 <!-- ================= BIO ================= -->
 <section id="biografia" class="pt-2 pb-4">
+  <div class="container">
 
-  <div class="container" id="bio-section">
+    <h2 class="text-center mb-3">Biografía</h2>
 
-    <h2 class="text-center mb-2 mt-0">
-      Biografía
-    </h2>
-
-    <!-- aquí se inyecta la bio -->
+    <!-- CONTENIDO DINÁMICO -->
+    <div id="bio-content"></div>
 
   </div>
-
 </section>
 
 <!-- ================= SKILLS ================= -->
 <section id="habilidades" class="py-4">
   <div class="container">
+
     <h2 class="text-center mb-3">Habilidades</h2>
+
+    <!-- CONTENIDO DINÁMICO -->
+    <div id="skills-content"></div>
+
   </div>
 </section>
 
 <!-- ================= TECNOLOGÍAS ================= -->
 <section id="tecnologias" class="py-4">
   <div class="container">
+
     <h2 class="text-center mb-3">Tecnologías</h2>
+
+    <!-- CONTENIDO DINÁMICO -->
+    <div id="tech-content"></div>
+
   </div>
 </section>
 
 <!-- ================= PROYECTOS ================= -->
 <section id="proyectos" class="py-4">
   <div class="container">
+
     <h2 class="text-center mb-3">Proyectos</h2>
+
+    <!-- CONTENIDO DINÁMICO -->
+    <div id="projects-content"></div>
+
   </div>
 </section>
 
 <!-- ================= CONTACTO ================= -->
-<section id="contacto" class="py-4">
+<!-- ================= CONTACTO ================= -->
+<section id="contacto" class="py-5">
+
   <div class="container">
-    <h2 class="text-center mb-3">Contacto</h2>
+
+    <h2 class="text-center mb-4">
+      Contacto
+    </h2>
+
+    <div class="row justify-content-center">
+
+      <div class="col-lg-7">
+
+        <div class="bg-white shadow-sm rounded-4 p-4">
+
+          <form id="contactForm">
+
+            <!-- NOMBRE -->
+            <div class="mb-3">
+
+              <label class="form-label">
+                Nombre
+              </label>
+
+              <input type="text"
+                     class="form-control"
+                     name="nom_jefe"
+                     required>
+
+            </div>
+
+            <!-- CORREO -->
+            <div class="mb-3">
+
+              <label class="form-label">
+                Correo
+              </label>
+
+              <input type="email"
+                     class="form-control"
+                     name="email"
+                     required>
+
+            </div>
+
+            <!-- ASUNTO -->
+            <div class="mb-3">
+
+              <label class="form-label">
+                Asunto
+              </label>
+
+              <input type="text"
+                     class="form-control"
+                     name="dato_importa"
+                     required>
+
+            </div>
+
+            <!-- MENSAJE -->
+            <div class="mb-3">
+
+              <label class="form-label">
+                Mensaje
+              </label>
+
+              <textarea class="form-control"
+                        name="msg_importa"
+                        rows="5"
+                        required></textarea>
+
+            </div>
+
+            <!-- BOTÓN -->
+            <button type="submit"
+                    class="btn btn-warning w-100 fw-semibold">
+
+              Enviar mensaje
+
+            </button>
+
+          </form>
+
+          <!-- RESPUESTA -->
+          <div id="contactResponse"
+               class="mt-3 text-center">
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
+
 </section>
 
 <!-- ================= MODAL ================= -->
@@ -167,6 +257,7 @@
 <script src="assets/js/scriptnav.js"></script>
 <script src="assets/js/pruebaajax.js"></script>
 <script src="assets/js/indexcontent.js"></script>
+<script src="assets/js/formcontacto.js"></script>
 
 </body>
 </html>
