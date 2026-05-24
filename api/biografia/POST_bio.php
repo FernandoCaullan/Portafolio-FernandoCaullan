@@ -1,68 +1,56 @@
 <?php
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 header("Content-Type: application/json");
 
-require_once "../../config/config_db.php";
+require_once __DIR__ . "/../../assets/bd/config_bd.php";
 
 try {
 
-    // Leer JSON
-    $data = json_decode(file_get_contents("php://input"), true);
+    $input = json_decode(file_get_contents("php://input"), true);
 
-    if (!$data) {
+    if (!$input) {
         echo json_encode([
             "status" => "error",
-            "message" => "No se recibieron datos"
+            "message" => "No data received"
         ]);
         exit;
     }
 
-    $nom_bio = $data['nom_bio'] ?? null;
-    $mini_bio = $data['mini_bio'] ?? null;
-    $detalle_bio = $data['detalle_bio'] ?? null;
-    $img_bio = $data['img_bio'] ?? null;
+    $nom_bio = $input["nom_bio"] ?? "";
+    $mini_bio = $input["mini_bio"] ?? "";
+    $detalle_bio = $input["detalle_bio"] ?? "";
+    $img_bio = $input["img_bio"] ?? "";
 
-    // Validación básica
-    if (!$nom_bio || !$mini_bio || !$detalle_bio || !$img_bio) {
+    if ($nom_bio == "" || $mini_bio == "" || $detalle_bio == "" || $img_bio == "") {
         echo json_encode([
             "status" => "error",
-            "message" => "Faltan campos obligatorios"
+            "message" => "Campos incompletos"
         ]);
         exit;
     }
 
-    // Verificar si ya existe perfil
-    $check = $conn->prepare("SELECT id FROM perfil WHERE activo = 1 LIMIT 1;");
-    $check->execute();
-    $exists = $check->fetch(PDO::FETCH_ASSOC);
+    // 👉 desactivar anteriores (soft delete real)
+    $conn->query("UPDATE perfil SET activo = 0");
 
-    if ($exists) {
-        echo json_encode([
-            "status" => "error",
-            "message" => "Ya existe una biografía. Usa PUT para editar."
-        ]);
-        exit;
-    }
-
-    // Insertar biografía
-    $sql = "INSERT INTO perfil (nom_bio, mini_bio, detalle_bio, img_bio)
-            VALUES (:nom_bio, :mini_bio, :detalle_bio, :img_bio)";
+    // 👉 insertar nueva bio activa
+    $sql = "INSERT INTO perfil (nom_bio, mini_bio, detalle_bio, img_bio, activo)
+            VALUES (?, ?, ?, ?, 1)";
 
     $stmt = $conn->prepare($sql);
-
-    $stmt->bindParam(":nom_bio", $nom_bio);
-    $stmt->bindParam(":mini_bio", $mini_bio);
-    $stmt->bindParam(":detalle_bio", $detalle_bio);
-    $stmt->bindParam(":img_bio", $img_bio);
+    $stmt->bind_param("ssss", $nom_bio, $mini_bio, $detalle_bio, $img_bio);
 
     $stmt->execute();
 
     echo json_encode([
         "status" => "success",
-        "message" => "Biografía creada correctamente"
+        "message" => "Biografía guardada correctamente"
     ]);
 
-} catch (PDOException $e) {
+} catch (Exception $e) {
+
     echo json_encode([
         "status" => "error",
         "message" => $e->getMessage()

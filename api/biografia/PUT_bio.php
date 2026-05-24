@@ -1,52 +1,45 @@
 <?php
 
-header("Content-Type: application/json");
-header("Access-Control-Allow-Methods: PUT");
-header("Access-Control-Allow-Headers: Content-Type");
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-require_once "../../config/config_db.php";
+header("Content-Type: application/json");
+
+require_once __DIR__ . "/../../assets/bd/config_bd.php";
 
 try {
 
-    // Leer datos enviados en PUT
-    $data = json_decode(file_get_contents("php://input"), true);
+    // recibir JSON del frontend
+    $input = json_decode(file_get_contents("php://input"), true);
 
-    if (!$data) {
+    if (!$input) {
         echo json_encode([
             "status" => "error",
-            "message" => "No se recibieron datos"
+            "message" => "No data received"
         ]);
         exit;
     }
 
-    $nom_bio = $data['nom_bio'] ?? null;
-    $mini_bio = $data['mini_bio'] ?? null;
-    $detalle_bio = $data['detalle_bio'] ?? null;
-    $img_bio = $data['img_bio'] ?? null;
+    $nom_bio = $input["nom_bio"] ?? "";
+    $mini_bio = $input["mini_bio"] ?? "";
+    $detalle_bio = $input["detalle_bio"] ?? "";
+    $img_bio = $input["img_bio"] ?? "";
 
-    // Validación mínima
-    if (!$nom_bio || !$mini_bio || !$detalle_bio || !$img_bio) {
+    if ($nom_bio == "" || $mini_bio == "" || $detalle_bio == "" || $img_bio == "") {
         echo json_encode([
             "status" => "error",
-            "message" => "Faltan campos obligatorios"
+            "message" => "Campos incompletos"
         ]);
         exit;
     }
 
-    // Como es CMS de 1 solo registro, usamos id fijo (1)
+    // 👉 actualizar SOLO la biografía activa
     $sql = "UPDATE perfil 
-            SET nom_bio = :nom_bio,
-                mini_bio = :mini_bio,
-                detalle_bio = :detalle_bio,
-                img_bio = :img_bio
-            WHERE id = 1";
+            SET nom_bio=?, mini_bio=?, detalle_bio=?, img_bio=? 
+            WHERE activo = 1";
 
     $stmt = $conn->prepare($sql);
-
-    $stmt->bindParam(":nom_bio", $nom_bio);
-    $stmt->bindParam(":mini_bio", $mini_bio);
-    $stmt->bindParam(":detalle_bio", $detalle_bio);
-    $stmt->bindParam(":img_bio", $img_bio);
+    $stmt->bind_param("ssss", $nom_bio, $mini_bio, $detalle_bio, $img_bio);
 
     $stmt->execute();
 
@@ -55,7 +48,8 @@ try {
         "message" => "Biografía actualizada correctamente"
     ]);
 
-} catch (PDOException $e) {
+} catch (Exception $e) {
+
     echo json_encode([
         "status" => "error",
         "message" => $e->getMessage()

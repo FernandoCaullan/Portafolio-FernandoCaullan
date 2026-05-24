@@ -20,7 +20,6 @@
       Portafolio
     </a>
 
-    <!-- MENÚ NORMAL -->
     <div class="navbar-nav ms-auto gap-3 d-flex">
       <a class="nav-link text-dark nav-hover" href="#biografia">Biografía</a>
       <a class="nav-link text-dark nav-hover" href="#habilidades">Habilidades</a>
@@ -29,7 +28,6 @@
       <a class="nav-link text-dark nav-hover" href="#contacto">Contacto</a>
     </div>
 
-    <!-- LOGIN -->
     <div class="ms-5">
       <button class="btn btn-dark"
               data-bs-toggle="modal"
@@ -41,12 +39,14 @@
   </div>
 
 </nav>
+
 <button id="miniNavBtn"
   class="btn btn-dark position-fixed top-0 start-0 m-2 d-none"
   data-bs-toggle="offcanvas"
   data-bs-target="#sideMenu">
   ☰
 </button>
+
 <!-- ================= OFFCANVAS ================= -->
 <div class="offcanvas offcanvas-start bg-warning" tabindex="-1" id="sideMenu">
 
@@ -64,30 +64,67 @@
 
     <hr>
 
-    
-  <button class="btn btn-dark w-100"
-          data-bs-toggle="modal"
-          data-bs-target="#loginModal">
-    Iniciar sesión
-  </button>
+    <button class="btn btn-dark w-100"
+            data-bs-toggle="modal"
+            data-bs-target="#loginModal">
+      Iniciar sesión
+    </button>
 
-    
   </div>
 
 </div>
 
 <!-- ================= CONTENIDO ================= -->
-<header id="inicio" class="py-5 mt-5">
-  <div class="container">
-    <h1>Fernando Caullan</h1>
+
+<!-- HEADER (menos aire) -->
+<header id="inicio" class="py-3 mb-0">
+  <div class="container text-center">
+    <h1 class="fw-bold mb-0">Fernando Caullan</h1>
   </div>
 </header>
 
-<section id="biografia" class="py-5"><div class="container"><h2>Biografía</h2></div></section>
-<section id="habilidades" class="py-5"><div class="container"><h2>Habilidades</h2></div></section>
-<section id="tecnologias" class="py-5"><div class="container"><h2>Tecnologías</h2></div></section>
-<section id="proyectos" class="py-5"><div class="container"><h2>Proyectos</h2></div></section>
-<section id="contacto" class="py-5"><div class="container"><h2>Contacto</h2></div></section>
+<!-- ================= BIO ================= -->
+<section id="biografia" class="pt-2 pb-4">
+
+  <div class="container" id="bio-section">
+
+    <h2 class="text-center mb-2 mt-0">
+      Biografía
+    </h2>
+
+    <!-- aquí se inyecta la bio -->
+
+  </div>
+
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="habilidades" class="py-4">
+  <div class="container">
+    <h2 class="text-center mb-3">Habilidades</h2>
+  </div>
+</section>
+
+<!-- ================= TECNOLOGÍAS ================= -->
+<section id="tecnologias" class="py-4">
+  <div class="container">
+    <h2 class="text-center mb-3">Tecnologías</h2>
+  </div>
+</section>
+
+<!-- ================= PROYECTOS ================= -->
+<section id="proyectos" class="py-4">
+  <div class="container">
+    <h2 class="text-center mb-3">Proyectos</h2>
+  </div>
+</section>
+
+<!-- ================= CONTACTO ================= -->
+<section id="contacto" class="py-4">
+  <div class="container">
+    <h2 class="text-center mb-3">Contacto</h2>
+  </div>
+</section>
 
 <!-- ================= MODAL ================= -->
 <div class="modal fade" id="loginModal" tabindex="-1">
@@ -100,37 +137,36 @@
       </div>
 
       <div class="modal-body">
-        <div id="errorBox"></div>
 
-          <form id="loginForm" method="POST" action="assets/forms/login.php">
+        <form id="loginForm" method="POST" action="assets/forms/login.php">
 
-            <div class="mb-3">
-              <label>Usuario</label>
-              <input type="text" name="user" class="form-control" required>
-            </div>
+          <div class="mb-3">
+            <label>Usuario</label>
+            <input type="text" name="user" class="form-control" required>
+          </div>
 
-            <div class="mb-3">
-              <label>Contraseña</label>
-              <input type="password" name="pass" class="form-control" required>
-            </div>
+          <div class="mb-3">
+            <label>Contraseña</label>
+            <input type="password" name="pass" class="form-control" required>
+          </div>
 
-            <button type="submit" class="btn btn-warning w-100">
-              Entrar
-            </button>
+          <button type="submit" class="btn btn-warning w-100">
+            Entrar
+          </button>
 
-          </form>
+        </form>
 
-        </div>
       </div>
 
     </div>
   </div>
 </div>
 
-<!-- ================= BOOTSTRAP JS ================= -->
+<!-- ================= SCRIPTS ================= -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/scriptnav.js"></script>
 <script src="assets/js/pruebaajax.js"></script>
+<script src="assets/js/indexcontent.js"></script>
 
 </body>
 </html>

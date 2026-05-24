@@ -11,108 +11,130 @@ if (!isset($_SESSION["user"])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>CMS Dashboard</title>
+    <title>Dashboard</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="bg-light">
+<body class="bg-body-tertiary">
 
-<!-- NAV -->
-<nav class="navbar bg-warning-subtle border-bottom border-warning px-3">
-    <span class="navbar-brand fw-bold">
-        CMS Panel
+<!-- NAVBAR -->
+<nav class="navbar bg-warning-subtle border-bottom border-warning shadow-sm px-3">
+
+    <span class="navbar-brand fw-bold text-warning-emphasis">
+        Panel Admin
     </span>
 
-    <button class="btn btn-outline-danger"
+    <button class="btn btn-outline-danger fw-semibold"
             data-bs-toggle="modal"
             data-bs-target="#logoutModal">
         Cerrar sesión
     </button>
 </nav>
 
-<!-- BOTONES -->
-<div class="container mt-4">
+<!-- CONTENIDO -->
+<div class="container mt-5">
 
-    <div class="btn-group w-100 mb-4">
-        <button class="btn btn-warning" onclick="showSection('bio')">
-            Biografía
-        </button>
+    <!-- PANEL PRINCIPAL -->
+    <div class="bg-warning-subtle border border-warning rounded-4 p-4 shadow-sm">
 
-        <button class="btn btn-outline-warning" onclick="showSection('skills')">
-            Skills
-        </button>
+        <h2 class="fw-bold text-warning-emphasis">
+            Bienvenido 👋 <?= $_SESSION['user'] ?>
+        </h2>
 
-        <button class="btn btn-outline-warning" onclick="showSection('tech')">
-            Tecnologías
-        </button>
+        <p class="text-secondary">
+            Selecciona una opción para administrar el contenido
+        </p>
 
-        <button class="btn btn-outline-warning" onclick="showSection('projects')">
-            Proyectos
-        </button>
+        
+        <!-- BOTONES (MENU TIPO DASHBOARD) -->
+        <div class="row g-3 mt-3">
+
+            <div class="col-12 col-md-6 col-lg-3">
+
+                <button class="btn btn-outline-warning w-100 py-3 fw-semibold menu-btn"
+                        onclick="loadSection('bio')">
+                    Biografía
+                </button>
+
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+
+                <button class="btn btn-outline-warning w-100 py-3 fw-semibold menu-btn"
+                        onclick="loadSection('skills')">
+                    Habilidades
+                </button>
+
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+
+                <button class="btn btn-outline-warning w-100 py-3 fw-semibold menu-btn"
+                        onclick="loadSection('tech')">
+                    Tecnologías
+                </button>
+
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+
+                <button class="btn btn-outline-warning w-100 py-3 fw-semibold menu-btn"
+                        onclick="loadSection('projects')">
+                    Proyectos
+                </button>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <!-- BIODATA -->
-    <section id="bio" class="cms-section">
-
-        <div class="p-4 border rounded bg-white shadow-sm">
-
-            <h3>🧑 Biografía</h3>
-
-            <div id="bio-container">Cargando...</div>
-
-        </div>
-
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills" class="cms-section d-none">
-        <div class="p-4 border rounded bg-white shadow-sm">
-            <h3>🧰 Skills</h3>
-            <p>Próximamente...</p>
-        </div>
-    </section>
-
-    <!-- TECH -->
-    <section id="tech" class="cms-section d-none">
-        <div class="p-4 border rounded bg-white shadow-sm">
-            <h3>⚙️ Tecnologías</h3>
-            <p>Próximamente...</p>
-        </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="cms-section d-none">
-        <div class="p-4 border rounded bg-white shadow-sm">
-            <h3>💼 Proyectos</h3>
-            <p>Próximamente...</p>
-        </div>
-    </section>
+    <!-- CONTENEDOR DINÁMICO DEL CRUD -->
+    <div id="app" class="mt-5"></div>
 
 </div>
 
-<!-- LOGOUT -->
-<div class="modal fade" id="logoutModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger-subtle">
-        <h5>Cerrar sesión</h5>
-        <button class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
+<!-- MODAL LOGOUT -->
+<div class="modal fade" id="logoutModal" tabindex="-1">
 
-      <div class="modal-body text-center">
-        <form method="POST" action="assets/forms/logout.php">
-            <button class="btn btn-danger w-100">
-                Confirmar logout
-            </button>
-        </form>
-      </div>
+    <div class="modal-dialog">
+
+        <div class="modal-content border-0 shadow-lg rounded-4">
+
+            <div class="modal-header bg-danger-subtle border-bottom border-danger">
+                <h5 class="modal-title text-danger-emphasis fw-bold">
+                    Cerrar sesión
+                </h5>
+
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body text-center">
+
+                <p class="text-secondary">
+                    ¿Seguro que quieres cerrar sesión?
+                </p>
+
+                <form method="POST" action="assets/forms/logout.php">
+                    <button type="submit"
+                            class="btn btn-danger w-100 fw-semibold">
+                        Sí, cerrar sesión
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
 </div>
 
+<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="dashbscript.js"></script>
+<script src="assets/js/biocrud.js"></script>
+<script src="assets/js/skillscrud.js"></script>
 
 </body>
 </html>

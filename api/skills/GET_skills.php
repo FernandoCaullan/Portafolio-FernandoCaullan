@@ -1,5 +1,4 @@
 <?php
-
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -9,26 +8,19 @@ require_once "../../assets/bd/config_bd.php";
 
 try {
 
-    $sql = "SELECT * FROM perfil WHERE activo = 1 LIMIT 1";
-
+    $sql = "SELECT id, nom_skill, img_icono FROM skils";
     $result = $conn->query($sql);
 
-    $bio = $result->fetch_assoc();
+    $skills = [];
 
-    if ($bio) {
-
-        echo json_encode([
-            "status" => "success",
-            "data" => $bio
-        ]);
-
-    } else {
-
-        echo json_encode([
-            "status" => "empty"
-        ]);
-
+    while ($row = $result->fetch_assoc()) {
+        $skills[] = $row;
     }
+
+    echo json_encode([
+        "status" => count($skills) > 0 ? "success" : "empty",
+        "data" => $skills
+    ]);
 
 } catch (Exception $e) {
 
