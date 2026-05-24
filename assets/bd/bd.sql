@@ -44,3 +44,5 @@ CREATE Table if not exists llamado(
     dato_importa VARCHAR(30) not null,
     msg_importa TEXT not null
 );
+ALTER TABLE perfil
+ADD COLUMN activo TINYINT(1) DEFAULT 1;

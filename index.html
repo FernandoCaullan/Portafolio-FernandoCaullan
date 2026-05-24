@@ -1,87 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio-</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="bg-warning bg-opacity-25">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-        <div class="container  d-flex justify-content-end align-items-center">
 
-            <!-- Links -->
-            <div class="navbar-nav gap-4">
-                <a class="navbar-link text-dark fs-5 text-decoration-none" href="">Biografia</a>
-                <a class="navbar-link text-dark fs-5 text-decoration-none" href="">Habilidades</a>
-                <a class="navbar-link text-dark fs-5 text-decoration-none" href="">Tecnologias</a>
-                <a class="navbar-link text-dark fs-5 text-decoration-none" href="">Proyectos</a>
-                <a class="navbar-link text-dark fs-5 text-decoration-none" href="">Contacto</a>
-            </div>
+<body class="bg-warning bg-opacity-25 text-dark">
 
-            <!-- Botón -->
-            <div class="ms-5">
-                <button class="btn btn-dark"
-                        data-bs-toggle="modal"
-                        data-bs-target="#loginModal">
-                    Iniciar sesión
-                </button>
-            </div>
-        </div>
-    </nav>
-    <header id="inicio">
-        <div class="container">
-            <h1 id="nombreBio">Fernando Caullan</h1>
-            <p id="miniDatoBio">Estudiante de Universidad catolica de temuco</p>
-            <img id="imgPerfil"
-            src="assets/img/imgPerfil.jpe" 
-            alt="Foto de perfil"
-            class="img-fluid rounded"
-            width="250"
-        >
-        </div>
-    </header>
+<!-- ================= NAVBAR ================= -->
+<nav id="mainNav" class="navbar navbar-expand-lg bg-warning fixed-top">
 
-    <!-- BIOGRAFIA -->
-    <section id="biografia">
-        <div class="container">
-            <h2>Biografía</h2>
-            <p id="textBio">
-               Me interesa mucho lo que es la computacion. Esto me a llevado a descubrir otras capacidades que poseo dentro del area, tengo habilidades como programador, diseñador web y amplio interes en apartados de gestion de redes. 
-            </p>
-        </div>
-    </section>
-     </section>
+  <div class="container">
 
-    <!-- HABILIDADES -->
-    <section id="habilidades">
-        <div class="container">
-            <h2>Habilidades</h2>
-        </div>
-    </section>
+    <a class="navbar-brand fw-bold" href="#inicio">
+      Portafolio
+    </a>
 
-    <!-- TECNOLOGIAS -->
-    <section id="tecnologias">
-        <div class="container">
-            <h2>Tecnologías</h2>
-        </div>
-    </section>
+    <!-- MENÚ NORMAL -->
+    <div class="navbar-nav ms-auto gap-3 d-flex">
+      <a class="nav-link text-dark nav-hover" href="#biografia">Biografía</a>
+      <a class="nav-link text-dark nav-hover" href="#habilidades">Habilidades</a>
+      <a class="nav-link text-dark nav-hover" href="#tecnologias">Tecnologías</a>
+      <a class="nav-link text-dark nav-hover" href="#proyectos">Proyectos</a>
+      <a class="nav-link text-dark nav-hover" href="#contacto">Contacto</a>
+    </div>
 
-    <!-- PROYECTOS -->
-    <section id="proyectos">
-        <div class="container">
-            <h2>Proyectos</h2>
-        </div>
-    </section>
+    <!-- LOGIN -->
+    <div class="ms-5">
+      <button class="btn btn-dark"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal">
+        Iniciar sesión
+      </button>
+    </div>
 
-    <!-- CONTACTO -->
-    <section id="contacto">
-        <div class="container">
-            <h2>Contacto</h2>
-        </div>
-    </section>
-    <div class="modal fade" id="loginModal" tabindex="-1">
+  </div>
+
+</nav>
+<button id="miniNavBtn"
+  class="btn btn-dark position-fixed top-0 start-0 m-2 d-none"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#sideMenu">
+  ☰
+</button>
+<!-- ================= OFFCANVAS ================= -->
+<div class="offcanvas offcanvas-start bg-warning" tabindex="-1" id="sideMenu">
+
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menú</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <a class="d-block text-dark mb-3" href="#biografia">Biografía</a>
+    <a class="d-block text-dark mb-3" href="#habilidades">Habilidades</a>
+    <a class="d-block text-dark mb-3" href="#tecnologias">Tecnologías</a>
+    <a class="d-block text-dark mb-3" href="#proyectos">Proyectos</a>
+    <a class="d-block text-dark mb-3" href="#contacto">Contacto</a>
+
+    <hr>
+
+    
+  <button class="btn btn-dark w-100"
+          data-bs-toggle="modal"
+          data-bs-target="#loginModal">
+    Iniciar sesión
+  </button>
+
+    
+  </div>
+
+</div>
+
+<!-- ================= CONTENIDO ================= -->
+<header id="inicio" class="py-5 mt-5">
+  <div class="container">
+    <h1>Fernando Caullan</h1>
+  </div>
+</header>
+
+<section id="biografia" class="py-5"><div class="container"><h2>Biografía</h2></div></section>
+<section id="habilidades" class="py-5"><div class="container"><h2>Habilidades</h2></div></section>
+<section id="tecnologias" class="py-5"><div class="container"><h2>Tecnologías</h2></div></section>
+<section id="proyectos" class="py-5"><div class="container"><h2>Proyectos</h2></div></section>
+<section id="contacto" class="py-5"><div class="container"><h2>Contacto</h2></div></section>
+
+<!-- ================= MODAL ================= -->
+<div class="modal fade" id="loginModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -91,30 +100,37 @@
       </div>
 
       <div class="modal-body">
+        <div id="errorBox"></div>
 
-        <form method="POST" action="assets/forms/login.php">
+          <form id="loginForm" method="POST" action="assets/forms/login.php">
 
-          <div class="mb-3">
-            <label>Usuario</label>
-            <input type="text" name="user" class="form-control" required>
-          </div>
+            <div class="mb-3">
+              <label>Usuario</label>
+              <input type="text" name="user" class="form-control" required>
+            </div>
 
-          <div class="mb-3">
-            <label>Contraseña</label>
-            <input type="password" name="pass" class="form-control" required>
-          </div>
+            <div class="mb-3">
+              <label>Contraseña</label>
+              <input type="password" name="pass" class="form-control" required>
+            </div>
 
-          <button class="btn btn-warning w-100">
-            Entrar
-          </button>
+            <button type="submit" class="btn btn-warning w-100">
+              Entrar
+            </button>
 
-        </form>
+          </form>
 
+        </div>
       </div>
 
     </div>
   </div>
 </div>
 
+<!-- ================= BOOTSTRAP JS ================= -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/scriptnav.js"></script>
+<script src="assets/js/pruebaajax.js"></script>
+
 </body>
+</html>
