@@ -6,40 +6,56 @@
   <title>Portafolio</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/indexstyle.css">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/cards.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 
 <body class="bg-warning bg-opacity-25 text-dark">
 
 <!-- ================= NAVBAR ================= -->
 <nav id="mainNav" class="navbar navbar-expand-lg bg-warning fixed-top">
-
   <div class="container">
 
     <a class="navbar-brand fw-bold" href="#inicio">
       Portafolio
     </a>
 
-    <div class="navbar-nav ms-auto gap-3 d-flex">
-      <a class="nav-link text-dark nav-hover" href="#biografia">Biografía</a>
-      <a class="nav-link text-dark nav-hover" href="#habilidades">Habilidades</a>
-      <a class="nav-link text-dark nav-hover" href="#tecnologias">Tecnologías</a>
-      <a class="nav-link text-dark nav-hover" href="#proyectos">Proyectos</a>
-      <a class="nav-link text-dark nav-hover" href="#contacto">Contacto</a>
-    </div>
+    <!-- BOTÓN HAMBURGUESA -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      ☰
+    </button>
 
-    <div class="ms-5">
-      <button class="btn btn-dark"
-              data-bs-toggle="modal"
-              data-bs-target="#loginModal">
-        Iniciar sesión
-      </button>
+    <!-- MENÚ -->
+    <div class="collapse navbar-collapse" id="navMenu">
+
+      <div class="navbar-nav ms-auto gap-3">
+        <a class="nav-link text-dark nav-hover" href="#biografia">Biografía</a>
+        <a class="nav-link text-dark nav-hover" href="#habilidades">Habilidades</a>
+        <a class="nav-link text-dark nav-hover" href="#tecnologias">Tecnologías</a>
+        <a class="nav-link text-dark nav-hover" href="#proyectos">Proyectos</a>
+        <a class="nav-link text-dark nav-hover" href="#contacto">Contacto</a>
+      </div>
+
+      <div class="ms-lg-5 mt-3 mt-lg-0">
+        <button class="btn btn-dark"
+                data-bs-toggle="modal"
+                data-bs-target="#loginModal">
+          Iniciar sesión
+        </button>
+      </div>
+
     </div>
 
   </div>
-
 </nav>
-
+<button id="miniNavBtn"
+  class="btn btn-dark position-fixed top-0 start-0 m-2 d-none"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#sideMenu">
+  ☰
+</button>
 <!-- ================= OFFCANVAS ================= -->
 <div class="offcanvas offcanvas-start bg-warning" tabindex="-1" id="sideMenu">
 
@@ -68,9 +84,22 @@
 </div>
 
 <!-- ================= CONTENIDO ================= -->
+<header class="py-5 mt-5 pb-5 bg-warning bg-opacity-25 border-bottom">
 
+  <div class="container text-center">
+
+    <h1 class="display-5 fw-bold text-dark">
+      Portafolio
+    </h1>
+
+    <p class="text-muted mb-0">
+      Desarrollo web | PHP | JavaScript | Bootstrap
+    </p>
+
+  </div>
+</header>
 <!-- ================= BIO ================= -->
-<section id="biografia" class="pt-2 pb-4">
+<section id="biografia" class="pt-4 pb-4 mt-3 mb-5">
   <div class="container">
 
     <h2 class="text-center mb-3">Biografía</h2>
@@ -82,10 +111,10 @@
 </section>
 
 <!-- ================= SKILLS ================= -->
-<section id="habilidades" class="py-4">
+<section id="habilidades" class="py-4 mt-4">
   <div class="container">
 
-    <h2 class="text-center mb-3">Habilidades</h2>
+    <h2 class="text-center mt-3 mb-3">Habilidades</h2>
 
     <!-- CONTENIDO DINÁMICO -->
     <div id="skills-content"></div>
@@ -117,7 +146,7 @@
   </div>
 </section>
 
-<!-- ================= CONTACTO ================= -->
+
 <!-- ================= CONTACTO ================= -->
 <section id="contacto" class="py-5">
 
@@ -252,6 +281,54 @@
   </div>
 </div>
 
+<!-- ================= FOOTER ================= -->
+<footer class="bg-dark text-light pt-4 pb-3 mt-5 border-top border-warning">
+
+  <div class="container">
+
+    <div class="row text-center text-md-start">
+
+      <!-- Marca -->
+      <div class="col-md-4 mb-3">
+        <h5 class="fw-bold text-warning">Portafolio</h5>
+        <p class="mb-0">
+          Desarrollado como una web, con php, js,bd y css ademas de un uso de bootstrap
+        </p>
+      </div>
+
+      <!-- Contacto adicional -->
+      <div class="col-md-4 mb-3">
+        <h6 class="fw-semibold text-warning">Datos de contacto extra</h6>
+        <p class="mb-1">Email: FERNANND@NOQUIEROREGALARME.com</p>
+        <p class="mb-0">WhatsApp: +56 9 0000 0000</p>
+      </div>
+
+      <!-- Redes sociales -->
+      <div class="col-md-4 mb-3">
+        <h6 class="fw-semibold text-warning">Redes sociales</h6>
+
+        <a href="#" class="text-light d-block text-decoration-none">Instagram</a>
+        <a href="https://github.com/FernandoCaullan" class="text-light d-block text-decoration-none">GitHub</a>
+      </div>
+
+    </div>
+
+    <hr class="border-warning">
+
+    <!-- Copyright -->
+    <div class="text-center small">
+
+      © <span id="year"></span> FNCV Marca Registrada. Todos los derechos reservados.
+
+    </div>
+
+  </div>
+
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 <!-- ================= SCRIPTS ================= -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/scriptnav.js"></script>

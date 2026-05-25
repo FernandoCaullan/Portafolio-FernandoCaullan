@@ -79,9 +79,11 @@ function showProjectView(projects) {
                 ${projects.map(p => `
                     <div class="col-md-6">
 
-                        <div class="card shadow-sm">
+                        <div class="card shadow-sm overflow-hidden h-100 project-card">
 
-                            <img src="${p.img_prev}" class="card-img-top">
+                            <img src="${p.img_prev}"
+                                class="w-100 project-img"
+                                onerror="this.src='assets/img/default.jpg'">
 
                             <div class="card-body">
 

@@ -1,0 +1,36 @@
+/* ==========================================
+   BASE / LAYOUT GLOBAL
+========================================== */
+
+body {
+    font-family: 'Roboto', sans-serif !important;
+    scroll-behavior: smooth;
+    padding-top: 80px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Secciones */
+section {
+    padding: 50px 0;
+    display: block;
+}
+
+section h2 {
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+/* Botones global */
+.btn {
+    transition: 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+#miniNavBtn {
+  z-index: 9999;
+}

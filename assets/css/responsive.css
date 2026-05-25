@@ -1,0 +1,15 @@
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 991px) {
+
+    #inicio {
+        text-align: center;
+        padding-top: 80px;
+    }
+
+    .navbar-nav {
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,56 @@
+html, body {
+    height: 100%;
+}
+
+/* 🔥 LAYOUT PRINCIPAL */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 🔥 CONTENIDO EXPANDE ESPACIO */
+.dashboard-main {
+    flex: 1;
+    padding-bottom: 60px; /* 👈 ESTA ES LA SEPARACIÓN REAL */
+}
+
+/* 🔥 FOOTER CONTROLADO */
+.dashboard-footer {
+    margin-top: auto;
+}
+/* ==========================================
+   BASE / LAYOUT GLOBAL
+========================================== */
+
+body {
+    font-family: 'Roboto', sans-serif !important;
+    scroll-behavior: smooth;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Secciones */
+section {
+    padding: 50px 0;
+    display: block;
+}
+
+section h2 {
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+/* Botones global */
+.btn {
+    transition: 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+#miniNavBtn {
+  z-index: 9999;
+}

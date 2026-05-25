@@ -47,24 +47,32 @@ async function loadBioToIndex() {
     const bio = data.data;
 
     container.innerHTML = `
-        <div class="text-center py-4">
+        <div class="row align-items-center py-4">
 
-            <img src="${bio.img_bio}"
-                 class="rounded-circle shadow mb-4"
-                 style="width:160px;height:160px;object-fit:cover;">
+            <!-- TEXTO IZQUIERDA -->
+            <div class="col-md-7">
 
-            <h3 class="fw-bold text-warning-emphasis">
-                ${escapeHTML(bio.nom_bio)}
-            </h3>
+                <h2 class="fw-bold text-dark mb-2 text-md-start text-center">
+                    ${escapeHTML(bio.nom_bio)}
+                </h2>
 
-            <p class="lead text-secondary mb-3">
-                ${escapeHTML(bio.mini_bio)}
-            </p>
+                <p class="lead text-muted text-md-start text-center mb-3">
+                    ${escapeHTML(bio.mini_bio)}
+                </p>
 
-            <div class="mx-auto" style="max-width:650px;">
-                <p class="text-muted lh-lg">
+                <p class="text-secondary lh-lg text-md-start text-center">
                     ${escapeHTML(bio.detalle_bio)}
                 </p>
+
+            </div>
+
+            <!-- IMAGEN DERECHA -->
+            <div class="col-md-5 text-center mt-4 mt-md-0">
+
+                <img src="${bio.img_bio}"
+                     class="rounded-circle shadow"
+                     style="width:220px;height:220px;object-fit:cover;">
+
             </div>
 
         </div>
@@ -171,60 +179,76 @@ async function loadProjectsToIndex() {
 
     const container = document.getElementById("projects-content");
 
-    const data = await fetchJSON("api/trabajos/GET_projects.php");
+    container.innerHTML = `<p class="text-center text-muted">Cargando...</p>`;
 
-    if (!data || data.status !== "success") {
-        container.innerHTML = `<p class="text-center text-muted">Sin proyectos</p>`;
-        return;
-    }
+    try {
 
-    container.innerHTML = `
-        <div class="row mt-4 g-4">
+        const data = await fetchJSON("api/trabajos/GET_projects.php");
 
-            ${data.data.map(p => `
+        if (!data || data.status !== "success") {
+            container.innerHTML = `<p class="text-center text-muted">Sin proyectos</p>`;
+            return;
+        }
 
-                <div class="col-md-6">
+        const projects = Array.isArray(data.data) ? data.data : [];
 
-                    <div class="card shadow-sm h-100">
+        if (projects.length === 0) {
+            container.innerHTML = `<p class="text-center text-muted">Sin proyectos</p>`;
+            return;
+        }
 
-                        <img src="${p.img_prev}" class="card-img-top">
+        container.innerHTML = `
+            <div class="row mt-4 g-4 justify-content-center">
+                ${projects.map(p => `
+                    <div class="col-md-4 col-lg-3">
 
-                        <div class="card-body">
+                        <div class="card text-white border-0 shadow-sm h-100 overflow-hidden">
 
-                            <h5 class="fw-bold">
-                                ${escapeHTML(p.titulo)}
-                            </h5>
+                            <img src="${p.img_prev}"
+                                 class="w-100"
+                                 style="height: 140px; object-fit: cover;"
+                                 alt="${escapeHTML(p.titulo)}"
+                                 onerror="this.src='assets/img/default.jpg'">
 
-                            <p class="text-muted">
-                                ${escapeHTML(p.descripcion)}
-                            </p>
+                            <div class="card-body bg-dark d-flex flex-column justify-content-between">
 
-                            <div class="d-flex gap-2">
+                                <div>
+                                    <h6 class="fw-bold mb-2">
+                                        ${escapeHTML(p.titulo)}
+                                    </h6>
 
-                                <a href="${p.demo_url}" target="_blank"
-                                   class="btn btn-sm btn-warning">
-                                    Demo
-                                </a>
+                                    <p class="text-light small mb-3">
+                                        ${escapeHTML(p.descripcion)}
+                                    </p>
+                                </div>
 
-                                <a href="${p.github_url}" target="_blank"
-                                   class="btn btn-sm btn-outline-dark">
-                                    GitHub
-                                </a>
+                                <div class="d-flex gap-2">
+                                    <a href="${p.demo_url}"
+                                       target="_blank"
+                                       class="btn btn-sm btn-warning">
+                                        Demo
+                                    </a>
+
+                                    <a href="${p.github_url}"
+                                     target="_blank" class="btn btn-sm btn-outline-light">
+                                     GitHub 
+                                    </a>
+                                </div>
 
                             </div>
 
                         </div>
 
                     </div>
+                `).join("")}
+            </div>
+        `;
 
-                </div>
-
-            `).join("")}
-
-        </div>
-    `;
+    } catch (err) {
+        console.error(err);
+        container.innerHTML = `<p class="text-center text-danger">Error al cargar proyectos</p>`;
+    }
 }
-
 // =======================
 // 🚀 INIT
 // =======================
