@@ -14,6 +14,8 @@ Como un objetivo de aprovar un ramo
 -  HTML / CSS /php
 - JS 
 - MYSQL
+## IAS UTILIZADAS
+- CHAT GPT
 
 ## Vista previa / Wireframe
 https://www.figma.com/design/LYs2kuRm1toeJwwLPpkxCj/Sin-t%C3%ADtulo?node-id=14-138&t=3iC2sxl6dOwwqTRA-1
