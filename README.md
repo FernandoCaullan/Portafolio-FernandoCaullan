@@ -21,4 +21,4 @@ Como un objetivo de aprovar un ramo
 https://www.figma.com/design/LYs2kuRm1toeJwwLPpkxCj/Sin-t%C3%ADtulo?node-id=14-138&t=3iC2sxl6dOwwqTRA-1
 
 ## LINK DEMO
-https://teclab.uct.cl/~fcaullan2022/portafolioEv3/Portafolio-FernandoCaullan/index.html
+https://teclab.uct.cl/~fcaullan2022/portafolioEv3/Portafolio-FernandoCaullan/index.php
