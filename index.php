@@ -20,7 +20,7 @@
   <div class="container">
 
     <a class="navbar-brand fw-bold" href="#inicio">
-      Portafolio
+      FernandoCaullan
     </a>
 
     <!-- BOTÓN HAMBURGUESA -->
