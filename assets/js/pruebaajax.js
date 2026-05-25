@@ -17,3 +17,12 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
       '<div class="alert alert-danger">Usuario o contraseña incorrectos</div>';
   }
 });
+const loginModal = document.getElementById("loginModal");
+
+loginModal.addEventListener("hidden.bs.modal", function () {
+
+  document.getElementById("errorBox").innerHTML = "";
+
+  document.getElementById("loginForm").reset();
+
+});

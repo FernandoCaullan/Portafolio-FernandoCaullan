@@ -1,3 +1,146 @@
+# Documentacion de pedidos IA
+
+ #### **P:** *como es la coneccion a una bsd mediante .php *
+---
+
+### 🧭 Conexion optima php
+
+Este código es lo más estándar, limpio y reutilizable, usando variables genéricas y buenas prácticas básicas
+
+## 🎨 Código
+
+```php
+$host = "localhost";
+$user = "db_user";
+$pass = "db_password";
+$db   = "db_name";
+
+$conn = new mysqli($host, $user, $pass, $db);
+
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Usar UTF-8 (recomendado)
+$conn->set_charset("utf8");
+
+echo "Conexión exitosa";
+
+// Cerrar conexión (buena práctica)
+$conn->close();
+
+```
+# HTML
+**P:** *como aplico un modal*
+---
+Boton que abre modal
+```html
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModal">
+  Abrir modal
+</button>
+```
+Modal Completo
+```html
+<div class="modal fade" id="miModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Título del modal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        Este es un modal hecho con Bootstrap 🚀
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-primary">
+          Guardar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+```
+# JavaScript
+**P:** *js para hacer un nav dinamico*
+```js
+const menuItems = [
+  { name: "Inicio", link: "index.html" },
+  { name: "Servicios", link: "servicios.html" },
+  { name: "Portafolio", link: "portafolio.html" },
+  { name: "Contacto", link: "contacto.html" }
+];
+
+const nav = document.getElementById("nav");
+
+menuItems.forEach(item => {
+  const li = document.createElement("li");
+  const a = document.createElement("a");
+
+  a.textContent = item.name;
+  a.href = item.link;
+
+  li.appendChild(a);
+  nav.appendChild(li);
+});
+```
+
+
+# Revision css
+
+**P:** Se le pide ajustar css y revisar errores
+---
+```css
+/* ==========================================
+   BASE / LAYOUT GLOBAL
+========================================== */
+
+body {
+    font-family: 'Roboto', sans-serif !important;
+    scroll-behavior: smooth;
+    padding-top: 80px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Secciones */
+section {
+    padding: 50px 0;
+    display: block;
+}
+
+section h2 {
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+/* Botones global */
+.btn {
+    transition: 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+#miniNavBtn {
+  z-index: 9999;
+}
+
+```
+# Index Revision
+---
+#### **P:** *Limpia el codigo de html*
+---
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -273,10 +416,6 @@
             Entrar
           </button>
 
-          <div id="errorBox" class="mt-3"></div>
-
-          <div id="errorBox" class="mt-3"></div>
-
         </form>
 
       </div>
@@ -339,6 +478,149 @@
 <script src="assets/js/pruebaajax.js"></script>
 <script src="assets/js/indexcontent.js"></script>
 <script src="assets/js/formcontacto.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 </body>
 </html>
+```
+#### **P:** *No me funciona el ajaax*
+```
+4. POSIBLE error más común (MUY probable en tu caso)
+❌ No estás cargando jQuery
+```
+En tu HTML NO aparece esto:
+```html
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+```
+
+👉 Si en pruebaajax.js o formcontacto.js usas $o$.ajax`, entonces:
+
+💥 NO FUNCIONA NADA
+#### **P:** *formato de colores para bootstrap*
+```
+🎨 Colores principales en Bootstrap
+
+Bootstrap usa esta paleta base:
+
+primary → azul
+secondary → gris
+success → verde
+danger → rojo
+warning → amarillo/naranjo
+info → celeste
+light → claro
+dark → oscuro
+body → color del texto del body
+```
+#### **P:** *manera de hacer un html responsivo con bootstrap*
+```
+Bootstrap ya viene pensado para responsive. La clave es usar correctamente:
+
+container
+row
+col-*
+breakpoints (sm, md, lg, xl)
+utilidades responsive (d-md-none, flex-lg-row, etc.)
+```
+#### **P:** *no quiero pensar mas hasme un footer*
+```html
+<footer style="background:#222; color:#fff; padding:40px 20px; text-align:center;">
+    <div style="max-width:1200px; margin:auto;">
+        
+        <h2 style="margin-bottom:10px;">Mi Sitio Web</h2>
+        
+        <p style="margin-bottom:20px;">
+            © 2026 Todos los derechos reservados.
+        </p>
+
+        <div style="margin-bottom:20px;">
+            <a href="#" style="color:#fff; margin:0 10px; text-decoration:none;">Inicio</a>
+            <a href="#" style="color:#fff; margin:0 10px; text-decoration:none;">Servicios</a>
+            <a href="#" style="color:#fff; margin:0 10px; text-decoration:none;">Contacto</a>
+        </div>
+
+        <div>
+            <a href="#" style="color:#fff; margin:0 10px;">Facebook</a>
+            <a href="#" style="color:#fff; margin:0 10px;">Instagram</a>
+            <a href="#" style="color:#fff; margin:0 10px;">Twitter</a>
+        </div>
+
+    </div>
+</footer>
+```
+#### **P:** *tengo 2 archivos y quiero probar el ajaax para un modal*
+
+```html
+Tu AJAX está casi correcto, pero en tu HTML no existe ningún elemento con id errorBox, y por eso cuando falle el login tendrás un error JavaScript.
+
+Dentro del modal agrega un contenedor para mostrar mensajes.
+
+Por ejemplo, debajo del botón:
+
+<button type="submit" class="btn btn-warning w-100">
+  Entrar
+</button>
+
+<div id="errorBox" class="mt-3"></div>
+
+Quedaría así:
+
+<form id="loginForm" method="POST" action="assets/forms/login.php">
+
+  <div class="mb-3">
+    <label>Usuario</label>
+    <input type="text" name="user" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label>Contraseña</label>
+    <input type="password" name="pass" class="form-control" required>
+  </div>
+
+  <button type="submit" class="btn btn-warning w-100">
+    Entrar
+  </button>
+
+  <div id="errorBox" class="mt-3"></div>
+
+</form>
+```
+#### **P:** *un tema es que el mensaje no desaparece si cierro el modal, se mantiene*
+
+```js
+const loginModal = document.getElementById("loginModal");
+
+loginModal.addEventListener("hidden.bs.modal", function () {
+
+  document.getElementById("errorBox").innerHTML = "";
+
+  document.getElementById("loginForm").reset();
+
+});
+```
+## Sintaxis de md 
+
+
+---
+#### **P:** *sintaxis de md*
+---
+
+```md
+
+# Título 1
+## Título 2
+### Título 3
+#### Título 4
+##### Título 5
+###### Título 6
+Texto normal
+
+**negrita**
+*cursiva*
+~~tachado~~
+- Item 1
+- Item 2
+  - Sub item
+```
+
+> **Notas:** Existen diferencias respecto a las request, algunos datos fueron modificados o son usados como referencia.
+
