@@ -12,3 +12,25 @@ window.addEventListener("scroll", () => {
   }
 
 });
+const offcanvas = document.getElementById("sideMenu");
+offcanvas.addEventListener("show.bs.offcanvas", () => {
+  btn.style.display = "none";
+});
+
+offcanvas.addEventListener("hidden.bs.offcanvas", () => {
+  if (window.scrollY > 80) {
+    btn.style.display = "block";
+  }
+});
+
+document.querySelectorAll('.offcanvas a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function () {
+    const offcanvasEl = document.querySelector('.offcanvas.show');
+    if (offcanvasEl) {
+      const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+      offcanvas?.hide();
+    }
+
+    // deja que el scroll al ancla ocurra
+  });
+});
